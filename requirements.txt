@@ -1,0 +1,8 @@
+streamlit
+pandas
+openpyxl
+pdf2image
+Pillow
+streamlit-drawable-canvas
+gspread>=5.0.0
+oauth2client>=4.1.3
