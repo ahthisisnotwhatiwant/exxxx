@@ -424,6 +424,7 @@ elif st.session_state.stage == 3:
         value=None,
         key="transfer_date_input"   # 키를 새로 지정
     )
+    st.session_state.transfer_date = transfer_date
 
     # (전학) 전학 예정 학교
     school_name = st.text_input(
@@ -670,7 +671,7 @@ elif st.session_state.stage == 4:
                                 st.session_state.selected_school,
                                 st.session_state.next_grade_input,
                                 st.session_state.student_name,
-                                st.session_state.get("transfer_date_input", None)
+                                st.session_state.get("transfer_date", None)
                             )
                             clear_session_state()
                         else:
