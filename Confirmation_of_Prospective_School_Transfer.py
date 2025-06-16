@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components  # ← 추가
 from datetime import date, timedelta
 import os
 import uuid
@@ -20,42 +19,6 @@ import re
 import json
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-
-try:
-    favicon_image = Image.open("my_favicon.png")
-    st.set_page_config(
-        page_title="전입학예정확인서",
-        page_icon=favicon_image,
-        layout="centered"
-    )
-except FileNotFoundError:
-    st.warning("파비콘 이미지 파일을 찾을 수 없습니다. 기본 아이콘이 사용됩니다.")
-    st.set_page_config(page_title="전입학예정확인서", layout="centered")
-
-# —————— 한글 달력 월 이름 번역 스크립트 삽입 ——————
-components.html(
-    """
-    const monthMap = {
-      "January":"1월",   "February":"2월",  "March":"3월",
-      "April":"4월",     "May":"5월",       "June":"6월",
-      "July":"7월",      "August":"8월",    "September":"9월",
-      "October":"10월",  "November":"11월","December":"12월"
-    };
-    function translateMonths() {
-      document.querySelectorAll(".react-datepicker__current-month")
-        .forEach(el => {
-          const [eng, year] = el.textContent.split(' ');
-          if (monthMap[eng]) {
-            el.textContent = monthMap[eng] + ' ' + year + '년';
-          }
-        });
-    }
-    document.addEventListener("click", () => setTimeout(translateMonths, 100));
-</script>
-    """,
-    height=0
-)
-# ——————————————————————————————————————————————
 
 PDF_TEMPLATE_PATH = "consent.pdf"
 TRANSFER_FORM_PATH = "transfer.pdf"
@@ -134,6 +97,17 @@ def log_submission_to_sheets(school: str, grade: str, student_name: str):
         # 시트 연결 문제 등 에러 발생 시, 사용자에게 알립니다.
         st.error(f"구글 시트 로깅 중 오류 발생: {e}")
 # ────────────────────────────────────────────────────────
+
+try:
+    favicon_image = Image.open("my_favicon.png")
+    st.set_page_config(
+        page_title="전입학예정확인서",
+        page_icon=favicon_image,
+        layout="centered"
+    )
+except FileNotFoundError:
+    st.warning("파비콘 이미지 파일을 찾을 수 없습니다. 기본 아이콘이 사용됩니다.")
+    st.set_page_config(page_title="전입학예정확인서", layout="centered")
 
 def grade_to_english(grade):
     number = re.search(r'\d+', grade)
