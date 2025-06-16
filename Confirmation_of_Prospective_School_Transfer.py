@@ -23,7 +23,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 # —————— 한글 달력 월 이름 번역 스크립트 삽입 ——————
 components.html(
-    \"\"\"<script>
+    """
     const monthMap = {
       "January":"1월",   "February":"2월",  "March":"3월",
       "April":"4월",     "May":"5월",       "June":"6월",
@@ -40,7 +40,8 @@ components.html(
         });
     }
     document.addEventListener("click", () => setTimeout(translateMonths, 100));
-    </script>\"\"\", 
+</script>
+    """,
     height=0
 )
 # ——————————————————————————————————————————————
