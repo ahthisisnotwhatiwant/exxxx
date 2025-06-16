@@ -1,7 +1,4 @@
 import streamlit as st
-from packaging.version import Version
-# Streamlit 버전이 1.25.0 이상일 때만 format 파라미터 사용
-_format_supported = Version(st.__version__) >= Version("1.25.0")
 from datetime import date, timedelta
 import os
 import uuid
@@ -342,10 +339,6 @@ elif st.session_state.stage == 3:
             max_value=max_date,
             key="student_birth_date_input"
         )
-        if st.session_state.student_birth_date:
-            st.markdown(
-                f"**선택된 생년월일:** {st.session_state.student_birth_date.strftime('%Y년 %m월 %d일')}"
-            )
 
         # (학생) 현 소속 학교 및 학년
         student_school = st.text_input(
@@ -405,12 +398,8 @@ elif st.session_state.stage == 3:
     st.session_state.move_date = st.date_input(
         "전입 예정일",
         value=None,
-        key="move_date_input"
+        key="move_date_input"      # 키 이름 통일
     )
-    if st.session_state.move_date:
-        st.markdown(
-            f"**선택된 전입 예정일:** {st.session_state.move_date.strftime('%Y년 %m월 %d일')}"
-        )
 
     address = st.text_input(
         "전입 예정 주소",
@@ -425,12 +414,9 @@ elif st.session_state.stage == 3:
     transfer_date = st.date_input(
         "전학 예정일",
         value=None,
-        key="transfer_date_input"
+        key="transfer_date_input"   # 키를 새로 지정
     )
-    if transfer_date:
-        st.markdown(
-            f"**선택된 전학 예정일:** {transfer_date.strftime('%Y년 %m월 %d일')}"
-        )
+
     # (전학) 전학 예정 학교
     school_name = st.text_input(
         "전학 예정 학교",
