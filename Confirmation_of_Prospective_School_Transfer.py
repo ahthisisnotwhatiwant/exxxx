@@ -179,6 +179,8 @@ if 'stage' not in st.session_state:
     st.session_state.pdf_bytes = None
     st.session_state.filename = None
     st.session_state.next_grade_input = ""
+    st.session_state.transfer_date_input = None
+
 
 def validate_inputs(student_name, parent_name, student_school, student_birth_date,
                     parent_phone, address, transfer_date, next_grade, move_date, relationship):
@@ -668,7 +670,7 @@ elif st.session_state.stage == 4:
                                 st.session_state.selected_school,
                                 st.session_state.next_grade_input,
                                 st.session_state.student_name,
-                                st.session_state.transfer_date_input
+                                st.session_state.get("transfer_date_input", None)
                             )
                             clear_session_state()
                         else:
